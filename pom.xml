@@ -27,7 +27,6 @@
 			</snapshots>
 		</repository>
     </repositories>
-
 	<dependencies>
 		<!-- Unit Test -->
 		<dependency>
