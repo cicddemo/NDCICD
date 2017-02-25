@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mkyong</groupId>
+	<groupId>com</groupId>
 	<artifactId>CounterWebApp</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
@@ -16,9 +16,19 @@
 		<logback.version>1.0.13</logback.version>
 		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
 	</properties>
+	  <!-- Repository list -->
+	  <repositories>
+	<repository>
+			<id>internal</id>
+			<name>Internal Repository</name>
+			<url>http://localhost:8085/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+    </repositories>
 
 	<dependencies>
-
 		<!-- Unit Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -110,8 +120,26 @@
 					<path>/CounterWebApp</path>
 				</configuration>
 			</plugin>
+			<!-- For Sonar -->
+			 <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>2.2</version>
+        </plugin>
 
 		</plugins>
-
 	</build>
+	<!-- Adding disturbution tag to move artifacts to Nexus -->
+	<distributionManagement>
+    <snapshotRepository>
+        <id>internal</id>
+        <name>Internal Snapshots</name>
+        <url>http://localhost:8085/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+    <repository>
+        <id>internal</id>
+        <name>Internal Releases</name>
+        <url>http://localhost:8085/nexus/content/repositories/releases/</url>
+    </repository>
+</distributionManagement>
 </project>
